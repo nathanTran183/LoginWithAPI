@@ -1,0 +1,25 @@
+<div class="col-md-6 col-md-offset-3">
+  <div class="alert alert-info">
+    Username: admin<br /> Password: 123123
+  </div>
+  <h2>Login</h2>
+
+  <form class="form-inline" *ngIf="!auth.getUser()">
+    <div class="form-group">
+      <label for="username">User:</label>
+      <input class="form-control" name="username" #username>
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input class="form-control" type="password" name="password" #password>
+    </div>
+
+    <a class="btn btn-default" (click)="login(username.value, password.value)">
+		Submit
+	</a>
+  </form>
+
+  <div class="alert alert-danger" role="alert" *ngIf="message">
+	{{ message }}
+</div>
+</div>
