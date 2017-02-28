@@ -22,17 +22,14 @@ export class LoginComponent implements OnInit {
     this.message = '';
     this.auth.login(username, password)
       .subscribe(result => {
-        console.log("Result" + result); //cho ni ne
         if (result === true) {
           this.router.navigate(['/']);
         } else {
-          console.log("Nothing");// han ko chay cho ni lun ne
           this.message = 'Username or password is incorrect';
           this.loading = false;
         }
       },
       error => {
-         console.log("Nothing");// han ko chay cho ni lun ne
           this.message = 'Username or password is incorrect';
           this.loading = false;
       });
