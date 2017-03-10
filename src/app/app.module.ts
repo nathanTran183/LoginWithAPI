@@ -15,7 +15,7 @@ import { LoginGuardService } from './service/login-guard.service';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: '', component: HomeComponent, canActivate: [LoginGuardService] },
+  { path: '', component: HomeComponent,   canActivate: [LoginGuardService] },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

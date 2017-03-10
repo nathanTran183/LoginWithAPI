@@ -5,7 +5,10 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: [
+    '../../../node_modules/admin-lte/plugins/iCheck/square/blue.css',
+    './login.component.css'
+  ]
 })
 export class LoginComponent implements OnInit {
   message: string;
