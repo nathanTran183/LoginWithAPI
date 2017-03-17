@@ -9,8 +9,8 @@ export class AuthService {
   token: string;
 
   constructor(private http: Http) {
-    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.token = currentUser && currentUser.token;
+    var user = JSON.parse(localStorage.getItem('user'));
+    this.token = user && user.token;
   }
 
   login(username: string, password: string): Observable<boolean> {

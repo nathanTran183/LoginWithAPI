@@ -6,9 +6,10 @@ import { RouterModule } from '@angular/router';
 import { AlertModule, DatepickerModule } from 'ng2-bootstrap';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
+import { ToasterModule } from 'angular2-toaster/angular2-toaster';
 
 export function createTranslateLoader( http: Http ) {
-    return new TranslateStaticLoader( http, '../public/assets/i18n', '.json' );
+    return new TranslateStaticLoader( http, '../assets/i18n', '.json' );
 }
 
 let modules = [
@@ -23,6 +24,7 @@ let modules = [
         provide: TranslateLoader,
         useFactory: (createTranslateLoader)
     }),
+    ToasterModule,
 ];
 
 import { HomeComponent } from './pages/home/home.component';
@@ -70,12 +72,14 @@ import { CanActivateGuard } from './services/guard.service';
 import { NotificationService } from './services/notification.service';
 import { BreadcrumbService } from './services/breadcrumb.service';
 import { AdminLTETranslateService } from './services/translate.service';
+import { LoggerService } from './services/logger.service';
 
 let services = [
     AuthService,
     UserService,
     BreadcrumbService,
     MessagesService,
+    LoggerService,
     CanActivateGuard,
     NotificationService,
     AdminLTETranslateService,

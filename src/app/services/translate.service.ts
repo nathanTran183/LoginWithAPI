@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { TranslateService } from 'ng2-translate';
 import { AuthService } from './auth.service';
-import { User } from '../models/user';
+import { Account } from '../models/account';
 
 const langs = ['en', 'fr', 'ru', 'he', 'zh'];
 const langmatch = /en|fr|ru|he|zh/;
@@ -9,15 +9,11 @@ const langmatch = /en|fr|ru|he|zh/;
 @Injectable()
 export class AdminLTETranslateService implements OnInit {
     private lang: string = 'us';
-    private currentUser: User;
 
-    constructor( private userServ: AuthService, private translate: TranslateService ) {
+    constructor( private translate: TranslateService ) {
         translate.addLangs( langs );
         // this language will be used as a fallback when a translation isn't found in the current language
         translate.setDefaultLang( 'en' );
-
-        this.userServ.getUser().subscribe(( user: User ) => {
-            this.currentUser = user;
 
             // the lang to use, if the lang isn't available, it will use the current loader to get them
             let browserLang = this.translate.getBrowserLang();
@@ -26,17 +22,10 @@ export class AdminLTETranslateService implements OnInit {
 
             // check if current User has a Preferred Language set, and it differs from his browser lang
             let useLang = 'en';
-            let prefLang = ( this.currentUser ) ? this.currentUser.preferredLang : null;
-            if ( !prefLang ) {
-                useLang = browserLang.match( langmatch ) ? browserLang : 'en';
-            } else {
-                console.log( 'Detected User preferred language: "' + prefLang + '"' );
-                useLang = prefLang.match( langmatch ) ? prefLang : 'en';
-            }
+            let prefLang = 'en';
             this.translate.use( useLang );
             console.log( 'Translation language has been set to: "' + useLang + '"' );
-            // translate.use( 'ru' );
-        });
+
     }
 
     public ngOnInit() {

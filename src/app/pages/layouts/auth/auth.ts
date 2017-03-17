@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../../models/user';
-import { UserService } from '../../../services/user.service';
+import { AuthService } from '../../../services/auth.service';
 import { LoggerService } from '../../../services/logger.service';
 
 import { ToasterService, ToasterConfig } from 'angular2-toaster/angular2-toaster';
@@ -16,7 +16,7 @@ export class LayoutsAuthComponent implements OnInit {
     private mylinks: Array<any> = [];
 
     constructor(
-      private userServ: UserService,
+      private userServ: AuthService,
       private toastr: ToasterService,
       private translate: AdminLTETranslateService
     ) {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from '../../models/user';
-import {UserService} from '../../services/user.service';
+import {Account} from '../../models/account';
+import {AuthService} from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,11 +11,11 @@ import { Router } from '@angular/router';
   templateUrl: './user-box.component.html'
 })
 export class UserBoxComponent implements OnInit {
-  private currentUser: User = new User();
+  private currentUser: Account = new Account();
 
-  constructor(private userServ: UserService, private router: Router) {
+  constructor(private userServ: AuthService, private router: Router) {
     // se connecter au modif du user courant
-      this.userServ.currentUser.subscribe((user: User) => this.currentUser = user);
+       this.currentUser = this.userServ.getUser();
   }
 
   public ngOnInit() {

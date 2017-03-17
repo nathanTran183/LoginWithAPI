@@ -6,20 +6,14 @@ import { AuthService } from './auth.service';
 export class CanActivateGuard implements CanActivate {
   private connected: boolean = false;
 
-  constructor(
-    private router: Router,
-    private auth: AuthService
-  ) {
-    this.auth.getUser().subscribe((user) => {
-      this.connected = user.connected;
-    });
-  }
+  constructor(private router: Router, private auth: AuthService) { }
 
   public canActivate() {
-    // test here if you user is logged
-    if ( !this.connected ) {
-      this.router.navigate( [ 'login' ] );
+    if (this.auth.getUser()) {
+      return true;
     }
-    return this.connected;
+    // not logged in so redirect to login page
+    this.router.navigate(['/login']);
+    return false;
   }
 }

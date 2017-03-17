@@ -15,7 +15,7 @@
       <form (submit)="login()" *ngIf="!auth.getUser()">
 
         <div class="form-group has-feedback">
-          <input type="email" class="form-control" #username placeholder="Username" required minlength="8" name="username">
+          <input type="text" class="form-control" #username placeholder="Username" required minlength="8" name="username">
         </div>
 
         <div class="form-group has-feedback">
@@ -53,17 +53,3 @@
   </div>
   <!-- /.login-box -->
 </body>
-
-<script src="../../../node_modules/admin-lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<script src="../../../node_modules/admin-lte/bootstrap/js/bootstrap.min.js"></script>
-<!-- iCheck -->
-<script src="../../../node_modules/admin-lte/plugins/iCheck/icheck.min.js"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' // optional
-    });
-  });
-</script>

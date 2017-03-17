@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from '../../models/user';
+import { Account } from '../../models/account';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
@@ -10,14 +10,14 @@ import { AuthService } from '../../services/auth.service';
 })
 export class MenuAsideComponent implements OnInit {
   private currentUrl: string;
-  private currentUser: User = new User();
+  private currentUser: Account = new Account();
 
   @Input() private links: Array<any> = [];
 
   constructor(private userServ: AuthService, public router: Router) {
     // getting the current url
     this.router.events.subscribe((evt) => this.currentUrl = evt.url);
-    this.userServ.getUser().subscribe((user) => this.currentUser = user);
+    this.currentUser = this.userServ.getUser();
   }
 
   public ngOnInit() {
