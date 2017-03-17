@@ -1,43 +1,101 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { Routes, RouterModule } from '@angular/router';
+import { HttpModule, Http } from '@angular/http';
+import { RouterModule } from '@angular/router';
+import { AlertModule, DatepickerModule } from 'ng2-bootstrap';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
 
-import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
+export function createTranslateLoader( http: Http ) {
+    return new TranslateStaticLoader( http, '../public/assets/i18n', '.json' );
+}
 
-import { AuthService } from './service/auth.service';
-import { LoginGuardService } from './service/login-guard.service';
-
-
-const appRoutes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: '', component: HomeComponent,   canActivate: [LoginGuardService] },
-
-  // otherwise redirect to home
-  { path: '**', redirectTo: '' }
-];
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    HomeComponent
-  ],
-  imports: [
+let modules = [
+    AlertModule.forRoot(),
+    DatepickerModule.forRoot(),
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
-  ],
-  providers: [
+    RouterModule,
+    TranslateModule.forRoot({
+        deps: [Http],
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader)
+    }),
+];
+
+import { HomeComponent } from './pages/home/home.component';
+import { PageNumComponent } from './pages/page-num/page-num.component';
+import { LayoutsAuthComponent } from './pages/layouts/auth/auth';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+
+let pages = [
+    HomeComponent,
+    PageNumComponent,
+    LayoutsAuthComponent,
+    LoginComponent,
+    RegisterComponent
+];
+import { AppComponent } from './app.component';
+import { AppHeaderComponent } from './widgets/app-header';
+import { AppFooterComponent } from './widgets/app-footer';
+import { MenuAsideComponent } from './widgets/menu-aside';
+import { ControlSidebarComponent } from './widgets/control-sidebar';
+import { MessagesBoxComponent } from './widgets/messages-box';
+import { NotificationBoxComponent } from './widgets/notification-box';
+import { TasksBoxComponent } from './widgets/tasks-box';
+import { UserBoxComponent } from './widgets/user-box';
+import { BreadcrumbComponent } from './widgets/breadcrumb';
+
+let widgets = [
+    AppComponent,
+    BreadcrumbComponent,
+    AppHeaderComponent,
+    AppFooterComponent,
+    MenuAsideComponent,
+    ControlSidebarComponent,
+    MessagesBoxComponent,
+    NotificationBoxComponent,
+    TasksBoxComponent,
+    UserBoxComponent
+];
+
+// Service
+import { AuthService } from './services/auth.service'; 
+import { UserService } from './services/user.service';
+import { MessagesService } from './services/messages.service';
+import { CanActivateGuard } from './services/guard.service';
+import { NotificationService } from './services/notification.service';
+import { BreadcrumbService } from './services/breadcrumb.service';
+import { AdminLTETranslateService } from './services/translate.service';
+
+let services = [
     AuthService,
-    LoginGuardService,
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
-  ],
-  bootstrap: [AppComponent]
+    UserService,
+    BreadcrumbService,
+    MessagesService,
+    CanActivateGuard,
+    NotificationService,
+    AdminLTETranslateService,
+];
+
+import { routing } from './app.routes';
+
+@NgModule( {
+    bootstrap: [AppComponent],
+    declarations: [
+        ...widgets,
+        ...pages
+    ],
+    imports: [
+        ...modules,
+        routing
+    ],
+    providers: [
+        ...services
+    ]
 })
+
 export class AppModule { }
