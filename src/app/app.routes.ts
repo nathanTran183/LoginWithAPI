@@ -14,10 +14,15 @@ const routes: Routes = [
   {
     canActivate: [CanActivateGuard],
     children: [
+      { 
+        canActivate: [CanActivateGuard],
+        path: '', 
+        redirectTo: 'home', 
+        pathMatch: 'full' },
       {
         canActivate: [CanActivateGuard],
         component: HomeComponent,
-        path: 'home'
+        path: 'home',        
       },
       {
         canActivate: [CanActivateGuard],
@@ -25,8 +30,14 @@ const routes: Routes = [
         path: 'page/:id'
       },
     ],
+    path: 'StudentManagement',
     component: LayoutsAuthComponent,
+  },
+  { 
+    canActivate: [CanActivateGuard],
     path: '',
+    redirectTo: 'StudentManagement', 
+    pathMatch: 'full'
   },
   // not logged routes
   {

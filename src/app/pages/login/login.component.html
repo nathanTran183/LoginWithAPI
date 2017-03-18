@@ -12,14 +12,14 @@
     <div class="login-box-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form (submit)="login()" *ngIf="!auth.getUser()">
+      <form (submit)="login(username.value, password.value)" *ngIf="!auth.getUser()">
 
         <div class="form-group has-feedback">
-          <input type="text" class="form-control" #username placeholder="Username" required minlength="8" name="username">
+          <input type="text" class="form-control" #username placeholder="Username" required minlength="5" name="username">
         </div>
 
         <div class="form-group has-feedback">
-          <input type="password" class="form-control" #password placeholder="Password" required minlength="8" name="password">
+          <input type="password" class="form-control" #password placeholder="Password" required minlength="5" name="password">
         </div>
         <div class="row">
           <div class="col-xs-8">
@@ -31,7 +31,7 @@
           </div>
           <!-- /.col -->
           <div class="col-xs-4">
-            <button type="submit" class="btn btn-primary btn-block btn-flat" (click)="login(username.value, password.value)">Sign In</button>
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
           </div>
           <!-- /.col -->
         </div>

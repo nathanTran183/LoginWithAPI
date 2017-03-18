@@ -11,11 +11,12 @@ import { Router } from '@angular/router';
   templateUrl: './user-box.component.html'
 })
 export class UserBoxComponent implements OnInit {
-  private currentUser: Account = new Account();
+  private currentUser: Account;
 
   constructor(private userServ: AuthService, private router: Router) {
     // se connecter au modif du user courant
-       this.currentUser = this.userServ.getUser();
+       this.currentUser = JSON.parse(this.userServ.getUser()).user;
+       console.log(this.currentUser);
   }
 
   public ngOnInit() {
@@ -24,5 +25,6 @@ export class UserBoxComponent implements OnInit {
 
   private logout = (): void => {
     this.userServ.logout();
+    this.router.navigate(['login']);
   }
 }

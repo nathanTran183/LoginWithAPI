@@ -2,9 +2,9 @@ export class Account {
     public username: string;
     public password: string;
     public email: string;
-    public created_at: string;
-    public updated_at: string;
-    public deleted_at: string;
+    public created_at: Date;
+    public updated_at: Date;
+    public deleted_at: Date;
     public connected: boolean = false;
 
     public constructor( data: any = {}) {

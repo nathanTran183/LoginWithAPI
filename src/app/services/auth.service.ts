@@ -20,10 +20,10 @@ export class AuthService {
       .map((response: Response) => {
         //login successful
         let token = response.json() && response.json().token;
-        let user = response.json() && response.json().username;
-        console.log("username: " + response.json().username);
+        let user = response.json() && response.json().user;        
         if (token) {
-          localStorage.setItem('user', JSON.stringify({ username: user, token: token }));
+          localStorage.setItem('user', JSON.stringify({ user: user, token: token }));
+          // console.log(localStorage.removeItem('user'));
           return true;
         }
         else {
@@ -31,7 +31,6 @@ export class AuthService {
         }
       })
       .catch((error:any) => {
-        console.log("XYZ") ;
         return Observable.throw(error.json().error || 'Server error');
       });
   }
