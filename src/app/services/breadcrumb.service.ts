@@ -8,7 +8,6 @@ export class BreadcrumbService {
     description: '',
     display: false,
     header : '',
-
     levels: [
       {
         icon: 'clock-o',

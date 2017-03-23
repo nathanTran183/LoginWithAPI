@@ -8,6 +8,7 @@ import { PageNumComponent } from './pages/page-num/page-num.component';
 import { LayoutsAuthComponent } from './pages/layouts/auth/auth';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
   // logged routes
@@ -18,7 +19,8 @@ const routes: Routes = [
         canActivate: [CanActivateGuard],
         path: '', 
         redirectTo: 'home', 
-        pathMatch: 'full' },
+        pathMatch: 'full' 
+      },
       {
         canActivate: [CanActivateGuard],
         component: HomeComponent,
@@ -26,17 +28,22 @@ const routes: Routes = [
       },
       {
         canActivate: [CanActivateGuard],
+        component: ProfileComponent,
+        path: 'profile',
+      },
+      {
+        canActivate: [CanActivateGuard],
         component: PageNumComponent,
         path: 'page/:id'
       },
     ],
-    path: 'StudentManagement',
+    path: '',
     component: LayoutsAuthComponent,
   },
   { 
     canActivate: [CanActivateGuard],
     path: '',
-    redirectTo: 'StudentManagement', 
+    redirectTo: 'home', 
     pathMatch: 'full'
   },
   // not logged routes

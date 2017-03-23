@@ -18,6 +18,9 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit() {
+    if(this.auth.getUser()){
+      this.router.navigate(['home']);
+    }
   }
 
   login(username: string, password: string): void {
@@ -26,14 +29,14 @@ export class LoginComponent implements OnInit {
     this.auth.login(username, password)
       .subscribe(result => {
         if (result === true) {
-          this.router.navigate(['StudentManagement/home']);
+          this.router.navigate(['home']);
         } else {
-          this.message = 'Username or password is incorrect';
+          this.message = 'There is a problem in system';
           this.loading = false;
         }
       },
       error => {
-          this.message = 'Username or password is incorrect';
+          this.message = error;
           this.loading = false;
       });
   }

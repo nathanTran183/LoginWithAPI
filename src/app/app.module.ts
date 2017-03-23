@@ -32,13 +32,15 @@ import { PageNumComponent } from './pages/page-num/page-num.component';
 import { LayoutsAuthComponent } from './pages/layouts/auth/auth';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 let pages = [
     HomeComponent,
     PageNumComponent,
     LayoutsAuthComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProfileComponent,
 ];
 import { AppComponent } from './app.component';
 import { AppHeaderComponent } from './widgets/app-header';
@@ -87,11 +89,12 @@ let services = [
 
 import { routing } from './app.routes';
 
+
 @NgModule( {
     bootstrap: [AppComponent],
     declarations: [
         ...widgets,
-        ...pages
+        ...pages,        
     ],
     imports: [
         ...modules,

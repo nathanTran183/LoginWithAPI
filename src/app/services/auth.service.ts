@@ -31,7 +31,7 @@ export class AuthService {
         }
       })
       .catch((error:any) => {
-        return Observable.throw(error.json().error || 'Server error');
+        return Observable.throw(error.json().message || 'Server error');
       });
   }
 
